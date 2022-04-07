@@ -1,0 +1,198 @@
+hparams: {'n_cnn_layers': 3, 'n_rnn_layers': 5, 'rnn_dim': 512, 'n_class': 29, 'n_feats': 128, 'stride': 2, 'dropout': 0.1, 'learning_rate': 0.0005, 'batch_size': 16, 'epochs': 10}
+device: cuda
+TRAIN LEN, TEST LEN: 737 82
+SpeechRecognitionModel(
+  (cnn): Conv2d(1, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+  (rescnn_layers): Sequential(
+    (0): ResidualCNN(
+      (cnn1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (cnn2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (dropout1): Dropout(p=0.1, inplace=False)
+      (dropout2): Dropout(p=0.1, inplace=False)
+      (layer_norm1): CNNLayerNorm(
+        (layer_norm): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+      )
+      (layer_norm2): CNNLayerNorm(
+        (layer_norm): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+      )
+    )
+    (1): ResidualCNN(
+      (cnn1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (cnn2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (dropout1): Dropout(p=0.1, inplace=False)
+      (dropout2): Dropout(p=0.1, inplace=False)
+      (layer_norm1): CNNLayerNorm(
+        (layer_norm): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+      )
+      (layer_norm2): CNNLayerNorm(
+        (layer_norm): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+      )
+    )
+    (2): ResidualCNN(
+      (cnn1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (cnn2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (dropout1): Dropout(p=0.1, inplace=False)
+      (dropout2): Dropout(p=0.1, inplace=False)
+      (layer_norm1): CNNLayerNorm(
+        (layer_norm): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+      )
+      (layer_norm2): CNNLayerNorm(
+        (layer_norm): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+      )
+    )
+  )
+  (fully_connected): Linear(in_features=2048, out_features=512, bias=True)
+  (birnn_layers): Sequential(
+    (0): BidirectionalGRU(
+      (BiGRU): GRU(512, 512, batch_first=True, bidirectional=True)
+      (layer_norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (dropout): Dropout(p=0.1, inplace=False)
+    )
+    (1): BidirectionalGRU(
+      (BiGRU): GRU(1024, 512, bidirectional=True)
+      (layer_norm): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+      (dropout): Dropout(p=0.1, inplace=False)
+    )
+    (2): BidirectionalGRU(
+      (BiGRU): GRU(1024, 512, bidirectional=True)
+      (layer_norm): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+      (dropout): Dropout(p=0.1, inplace=False)
+    )
+    (3): BidirectionalGRU(
+      (BiGRU): GRU(1024, 512, bidirectional=True)
+      (layer_norm): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+      (dropout): Dropout(p=0.1, inplace=False)
+    )
+    (4): BidirectionalGRU(
+      (BiGRU): GRU(1024, 512, bidirectional=True)
+      (layer_norm): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+      (dropout): Dropout(p=0.1, inplace=False)
+    )
+  )
+  (classifier): Sequential(
+    (0): Linear(in_features=1024, out_features=512, bias=True)
+    (1): GELU()
+    (2): Dropout(p=0.1, inplace=False)
+    (3): Linear(in_features=512, out_features=29, bias=True)
+  )
+)
+Num Model Parameters 23705373
+Train Epoch: 1 [0/11790 (0%)]	Loss: 9.025771
+Train Epoch: 1 [1600/11790 (14%)]	Loss: 2.969345
+Train Epoch: 1 [3200/11790 (27%)]	Loss: 2.918808
+Train Epoch: 1 [4800/11790 (41%)]	Loss: 2.947035
+Train Epoch: 1 [6400/11790 (54%)]	Loss: 2.905164
+Train Epoch: 1 [8000/11790 (68%)]	Loss: 2.911574
+Train Epoch: 1 [9600/11790 (81%)]	Loss: 2.859403
+Train Epoch: 1 [11200/11790 (95%)]	Loss: 2.540020
+
+evaluating...
+Test set: Average loss: 2.3575, Average CER: 0.684927 Average WER: 1.0039
+
+Train Epoch: 2 [0/11790 (0%)]	Loss: 2.157820
+Train Epoch: 2 [1600/11790 (14%)]	Loss: 1.813934
+Train Epoch: 2 [3200/11790 (27%)]	Loss: 1.613774
+Train Epoch: 2 [4800/11790 (41%)]	Loss: 1.271990
+Train Epoch: 2 [6400/11790 (54%)]	Loss: 1.212165
+Train Epoch: 2 [8000/11790 (68%)]	Loss: 1.050817
+Train Epoch: 2 [9600/11790 (81%)]	Loss: 1.009467
+Train Epoch: 2 [11200/11790 (95%)]	Loss: 0.988011
+
+evaluating...
+Test set: Average loss: 1.2072, Average CER: 0.377395 Average WER: 0.8524
+
+Train Epoch: 3 [0/11790 (0%)]	Loss: 1.015494
+Train Epoch: 3 [1600/11790 (14%)]	Loss: 0.847893
+Train Epoch: 3 [3200/11790 (27%)]	Loss: 0.755054
+Train Epoch: 3 [4800/11790 (41%)]	Loss: 0.749127
+Train Epoch: 3 [6400/11790 (54%)]	Loss: 0.736716
+Train Epoch: 3 [8000/11790 (68%)]	Loss: 0.707728
+Train Epoch: 3 [9600/11790 (81%)]	Loss: 0.646970
+Train Epoch: 3 [11200/11790 (95%)]	Loss: 0.635365
+
+evaluating...
+Test set: Average loss: 0.9676, Average CER: 0.317982 Average WER: 0.7633
+
+Train Epoch: 4 [0/11790 (0%)]	Loss: 0.656056
+Train Epoch: 4 [1600/11790 (14%)]	Loss: 0.602289
+Train Epoch: 4 [3200/11790 (27%)]	Loss: 0.643585
+Train Epoch: 4 [4800/11790 (41%)]	Loss: 0.633333
+Train Epoch: 4 [6400/11790 (54%)]	Loss: 0.606148
+Train Epoch: 4 [8000/11790 (68%)]	Loss: 0.626928
+Train Epoch: 4 [9600/11790 (81%)]	Loss: 0.619727
+Train Epoch: 4 [11200/11790 (95%)]	Loss: 0.504045
+
+evaluating...
+Test set: Average loss: 0.8689, Average CER: 0.273176 Average WER: 0.7249
+
+Train Epoch: 5 [0/11790 (0%)]	Loss: 0.477269
+Train Epoch: 5 [1600/11790 (14%)]	Loss: 0.464940
+Train Epoch: 5 [3200/11790 (27%)]	Loss: 0.428331
+Train Epoch: 5 [4800/11790 (41%)]	Loss: 0.570396
+Train Epoch: 5 [6400/11790 (54%)]	Loss: 0.422282
+Train Epoch: 5 [8000/11790 (68%)]	Loss: 0.448441
+Train Epoch: 5 [9600/11790 (81%)]	Loss: 0.511466
+Train Epoch: 5 [11200/11790 (95%)]	Loss: 0.374253
+
+evaluating...
+Test set: Average loss: 0.8332, Average CER: 0.256063 Average WER: 0.6892
+
+Train Epoch: 6 [0/11790 (0%)]	Loss: 0.400984
+Train Epoch: 6 [1600/11790 (14%)]	Loss: 0.411712
+Train Epoch: 6 [3200/11790 (27%)]	Loss: 0.324254
+Train Epoch: 6 [4800/11790 (41%)]	Loss: 0.384810
+Train Epoch: 6 [6400/11790 (54%)]	Loss: 0.331544
+Train Epoch: 6 [8000/11790 (68%)]	Loss: 0.378160
+Train Epoch: 6 [9600/11790 (81%)]	Loss: 0.536544
+Train Epoch: 6 [11200/11790 (95%)]	Loss: 0.279193
+
+evaluating...
+Test set: Average loss: 0.7205, Average CER: 0.233018 Average WER: 0.6394
+
+Train Epoch: 7 [0/11790 (0%)]	Loss: 0.482066
+Train Epoch: 7 [1600/11790 (14%)]	Loss: 0.401551
+Train Epoch: 7 [3200/11790 (27%)]	Loss: 0.359271
+Train Epoch: 7 [4800/11790 (41%)]	Loss: 0.333266
+Train Epoch: 7 [6400/11790 (54%)]	Loss: 0.350255
+Train Epoch: 7 [8000/11790 (68%)]	Loss: 0.369322
+Train Epoch: 7 [9600/11790 (81%)]	Loss: 0.261755
+Train Epoch: 7 [11200/11790 (95%)]	Loss: 0.318847
+
+evaluating...
+Test set: Average loss: 0.7166, Average CER: 0.224335 Average WER: 0.6365
+
+Train Epoch: 8 [0/11790 (0%)]	Loss: 0.354522
+Train Epoch: 8 [1600/11790 (14%)]	Loss: 0.237477
+Train Epoch: 8 [3200/11790 (27%)]	Loss: 0.221792
+Train Epoch: 8 [4800/11790 (41%)]	Loss: 0.318811
+Train Epoch: 8 [6400/11790 (54%)]	Loss: 0.234187
+Train Epoch: 8 [8000/11790 (68%)]	Loss: 0.282265
+Train Epoch: 8 [9600/11790 (81%)]	Loss: 0.358941
+Train Epoch: 8 [11200/11790 (95%)]	Loss: 0.228441
+
+evaluating...
+Test set: Average loss: 0.7308, Average CER: 0.224259 Average WER: 0.6190
+
+Train Epoch: 9 [0/11790 (0%)]	Loss: 0.250443
+Train Epoch: 9 [1600/11790 (14%)]	Loss: 0.274564
+Train Epoch: 9 [3200/11790 (27%)]	Loss: 0.338907
+Train Epoch: 9 [4800/11790 (41%)]	Loss: 0.242194
+Train Epoch: 9 [6400/11790 (54%)]	Loss: 0.324138
+Train Epoch: 9 [8000/11790 (68%)]	Loss: 0.242293
+Train Epoch: 9 [9600/11790 (81%)]	Loss: 0.293143
+Train Epoch: 9 [11200/11790 (95%)]	Loss: 0.292663
+
+evaluating...
+Test set: Average loss: 0.7019, Average CER: 0.213021 Average WER: 0.5899
+
+Train Epoch: 10 [0/11790 (0%)]	Loss: 0.257801
+Train Epoch: 10 [1600/11790 (14%)]	Loss: 0.195932
+Train Epoch: 10 [3200/11790 (27%)]	Loss: 0.325291
+Train Epoch: 10 [4800/11790 (41%)]	Loss: 0.228155
+Train Epoch: 10 [6400/11790 (54%)]	Loss: 0.255693
+Train Epoch: 10 [8000/11790 (68%)]	Loss: 0.279788
+Train Epoch: 10 [9600/11790 (81%)]	Loss: 0.266818
+Train Epoch: 10 [11200/11790 (95%)]	Loss: 0.199908
+
+evaluating...
+Test set: Average loss: 0.6815, Average CER: 0.206795 Average WER: 0.5738

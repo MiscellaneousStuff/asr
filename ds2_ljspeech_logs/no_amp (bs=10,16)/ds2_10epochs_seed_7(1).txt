@@ -266,4 +266,3 @@ Train Epoch: 10 [11200/11790 (95%)]	Loss: 0.172449
 
 evaluating...
 Test set: Average loss: 0.6933, Average CER: 0.197939 Average WER: 0.5551
-
