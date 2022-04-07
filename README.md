@@ -4,5 +4,5 @@
 Automatic speech recognition (ASR) in PyTorch
 
 ## Datasets
-- [-] LJSpeech
+- [ ] LJSpeech
 - [ ] Silent Speech (Audio & Text only)
