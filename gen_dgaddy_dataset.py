@@ -1,8 +1,8 @@
 import argparse
 import os
 import json
-import jiwer
 import csv
+from unidecode import unidecode
 
 parser = argparse.ArgumentParser(\
     description=\
@@ -18,14 +18,11 @@ if __name__ == "__main__":
         "nonparallel_data/",
         "voiced_parallel_data/"
     ]
-    # top_dirs = top_dirs[0:1]
-    transformation = jiwer.Compose(\
-        [jiwer.RemovePunctuation(), jiwer.ToLowerCase()])
     with open("metadata_dgaddy.csv", "w", newline="") as csvfile:
         csv_writer = csv.writer(
             csvfile,
-            delimiter=" ",
-            quotechar="|",
+            delimiter="|",
+            quotechar="'",
             quoting=csv.QUOTE_MINIMAL)
         for top_dir in top_dirs:
             sub_dirs = os.listdir(os.path.join(base_dir, top_dir))
@@ -43,6 +40,6 @@ if __name__ == "__main__":
                             fname = f"{file_idx}_audio_clean.flac"
                             audio_path = \
                                 os.path.join(base_dir, top_dir, sub_dir, fname)
-                            text = info["text"]
-                            normalised_text = transformation(text)
-                            csv_writer.writerow([audio_path, text, normalised_text])
+
+                            text = unidecode(info["text"])
+                            csv_writer.writerow([audio_path, text])
