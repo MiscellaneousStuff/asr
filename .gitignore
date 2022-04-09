@@ -131,3 +131,4 @@ dmypy.json
 # Ignore trained models for now
 models/
 metadata_dgaddy.csv
+duration.txt
