@@ -132,3 +132,6 @@ dmypy.json
 models/
 metadata_dgaddy.csv
 duration.txt
+.neptune/
+
+*.csv
