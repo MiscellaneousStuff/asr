@@ -81,8 +81,19 @@ if __name__ == "__main__":
                             text = unidecode(info["text"])
 
                             if args.semg_transduction_preds_path:
+                                
+                                if book == "books/War_of_the_Worlds.txt":
+                                    file_path = "/home/joe/projects/silent_speech/pred_audio/open_vocab_parallel"
+                                else:
+                                    file_path = "/home/joe/projects/silent_speech/pred_audio/open_vocab_non_parallel"
+                                """
                                 mel_spectrogram_path = \
                                     os.path.join(args.semg_transduction_preds_path, \
+                                                 modality, \
+                                                 str(sentence_idx))
+                                """
+                                mel_spectrogram_path = \
+                                    os.path.join(file_path, \
                                                  modality, \
                                                  str(sentence_idx))
                                 audio_path = mel_spectrogram_path
