@@ -18,12 +18,13 @@ args = parser.parse_args()
 
 if __name__ == "__main__":
     base_dir = args.emg_data_dir
+    
     """
     top_dirs = [
         ["closed_vocab/silent/", "silent"],
         ["closed_vocab/voiced/", "voiced"]]
     """
-
+    
     """
     "nonparallel_data/",
     "voiced_parallel_data/"
@@ -31,7 +32,8 @@ if __name__ == "__main__":
     
     top_dirs = [
         ["voiced_parallel_data", "voiced"],
-        ["silent_parallel_data", "silent"]
+        ["silent_parallel_data", "silent"],
+        ["nonparallel_data",     "voiced"]
     ]
 
     # testset_path = "testset_closed.json"
