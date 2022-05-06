@@ -30,12 +30,14 @@ if __name__ == "__main__":
     "voiced_parallel_data/"
     """
     
+    
     top_dirs = [
         ["voiced_parallel_data", "voiced"],
         ["silent_parallel_data", "silent"],
         ["nonparallel_data",     "voiced"]
     ]
-
+    
+    
     # testset_path = "testset_closed.json"
     testset_path = "testset_largedev.json"
 
@@ -46,6 +48,9 @@ if __name__ == "__main__":
 
     if args.semg_transduction_preds_path:
         csv_path = "metadata_dgaddy_preds.csv"
+
+    total_non_para = 0
+    max_non_para   = 10_000 # 1_588 // 2
 
     with open(csv_path, "w", newline="") as csvfile:
         csv_writer = csv.writer(
@@ -86,20 +91,35 @@ if __name__ == "__main__":
                                     file_path = "/home/joe/projects/silent_speech/pred_audio/open_vocab_parallel"
                                 else:
                                     file_path = "/home/joe/projects/silent_speech/pred_audio/open_vocab_non_parallel"
+                                
+
                                 """
                                 mel_spectrogram_path = \
                                     os.path.join(args.semg_transduction_preds_path, \
                                                  modality, \
                                                  str(sentence_idx))
                                 """
+
+                                
                                 mel_spectrogram_path = \
                                     os.path.join(file_path, \
                                                  modality, \
                                                  str(sentence_idx))
+                                
+                                
                                 audio_path = mel_spectrogram_path
 
                             if modality == "voiced":
                                 if sentence_idx in valid_idxs:
-                                    dataset = "valid"
-                                    
-                            csv_writer.writerow([audio_path, text, dataset, modality])
+                                    dataset = "valid"                  
+
+                            # csv_writer.writerow([audio_path, text, dataset, modality])
+
+                            
+                            if not book == "books/War_of_the_Worlds.txt":
+                                if total_non_para < max_non_para:
+                                    csv_writer.writerow([audio_path, text, dataset, modality])
+                                    total_non_para += 1
+                            else:
+                                csv_writer.writerow([audio_path, text, dataset, modality])
+                            
