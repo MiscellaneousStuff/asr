@@ -34,8 +34,9 @@ if __name__ == "__main__":
     top_dirs = [
         ["voiced_parallel_data", "voiced"],
         ["silent_parallel_data", "silent"],
-        ["nonparallel_data",     "voiced"]
     ]
+
+    # ["nonparallel_data",     "voiced"]
     
     
     # testset_path = "testset_closed.json"
